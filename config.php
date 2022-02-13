@@ -56,6 +56,7 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
+include_once($_SERVER['DOCUMENT_ROOT'] . $_SERVER['REDIRECT_STD'] .'/core/library/func.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . $_SERVER['REDIRECT_STD'] .'/core/library/Indi.php');
 foreach (array('www', 'core') as $p) {
     if (($cnf = $_SERVER['DOCUMENT_ROOT'] . $_SERVER['REDIRECT_STD'] . '/' . $p . '/application/config.ini') && is_file($cnf)) {
