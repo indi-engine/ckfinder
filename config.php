@@ -58,8 +58,9 @@ ATTENTION: The trailing slash is required.
 */
 define('DOC', $_SERVER['DOCUMENT_ROOT']);
 define('STD', $_SERVER['REDIRECT_STD']);
-include_once(DOC . STD . '/vendor/perminov/system/library/func.php');
-include_once(DOC . STD . '/vendor/perminov/system/library/Indi.php');
+define('VDR', '/' . $_SERVER['VDR']);
+include_once(DOC . STD . VDR . '/system/library/func.php');
+include_once(DOC . STD . VDR . '/system/library/Indi.php');
 if (is_file($cnf = DOC . STD . '/application/config.ini')) $cnf = ini($cnf);
 $std = STD; $uph = ini('upload')->path;
 
