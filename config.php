@@ -56,25 +56,22 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-include_once($_SERVER['DOCUMENT_ROOT'] . $_SERVER['REDIRECT_STD'] .'/core/library/func.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . $_SERVER['REDIRECT_STD'] .'/core/library/Indi.php');
-foreach (array('www', 'core') as $p) {
-    if (($cnf = $_SERVER['DOCUMENT_ROOT'] . $_SERVER['REDIRECT_STD'] . '/' . $p . '/application/config.ini') && is_file($cnf)) {
-        $cnf = @ini($cnf);
-        break;
-    }
-}
+define('DOC', $_SERVER['DOCUMENT_ROOT']);
+define('STD', $_SERVER['REDIRECT_STD']);
+include_once(DOC . STD . '/vendor/perminov/system/library/func.php');
+include_once(DOC . STD . '/vendor/perminov/system/library/Indi.php');
+if (is_file($cnf = DOC . STD . '/application/config.ini')) $cnf = ini($cnf);
+$std = STD; $uph = ini('upload')->path;
 
-$std = $_SERVER['REDIRECT_STD'];
-$uph = ini('upload')->path;
+// Mind level-ups
 if (preg_match(':^(\.\./)+:', $uph, $m)) {
     $uph = preg_replace(':^(\.\./)+:', '', $uph);
     $lup = count(explode('/', rtrim($m[0], '/')));
     for ($i = 0; $i < $lup; $i++) $std = preg_replace(':/[a-zA-Z0-9_\-]+$:', '', $std);
 }
 
+// Build base url
 $baseUrl =  $std . '/' . $uph . '/' . ini('ckeditor')->uploadPath .'/';
-
 if ($_SESSION['admin']['alternate']) $baseUrl .= $_SESSION['admin']['alternate'] . '/' . $_SESSION['admin']['id'] . '/';
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
